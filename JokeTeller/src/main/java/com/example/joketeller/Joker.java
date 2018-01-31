@@ -30,9 +30,11 @@ public class Joker {
     public String getJoke(){
         return jokes.get(getRandom());
     }
+
     private static int getRandom(){
         Random random = new Random();
-        return random.nextInt(jokes.size()) + 1;
+        int i = random.nextInt(jokes.size()-1);
+        return i;
     }
 
 }

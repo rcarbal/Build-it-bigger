@@ -2,8 +2,6 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Pair;
-import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -13,14 +11,20 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-/**
- * Created by rcarb on 1/31/2018.
- */
-
 public class GetBeanJokeTask extends AsyncTask<Context, Void, String> {
+    public GetBeanJokeTask(AsyncResponse response) {
+        this.response = response;
+    }
 
+    //Interface
+    public interface AsyncResponse {
+        void processFinish(String output);
+    }
+    //Asynctask global varuables
+    public AsyncResponse response = null;
     private static MyApi myApiService = null;
-    Context context;
+    private Context context;
+
     @Override
     protected String doInBackground(Context...contents) {
         if (myApiService == null) {
@@ -51,7 +55,7 @@ public class GetBeanJokeTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+        response.processFinish(s);
     }
 }
 

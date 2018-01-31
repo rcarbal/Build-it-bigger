@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
@@ -9,8 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.myandroidlibrary.DisplayJokeActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Random;
+
+
+public class MainActivity extends AppCompatActivity
+        implements GetBeanJokeTask.AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +48,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-       GetBeanJokeTask task = new GetBeanJokeTask();
-       task.execute(this);
+        GetBeanJokeTask task = new GetBeanJokeTask(this);
+        task.execute(this);
     }
 
 
+    @Override
+    public void processFinish(String output) {
+        Intent intent = new Intent(MainActivity.this, DisplayJokeActivity.class);
+        intent.putExtra(DisplayJokeActivity.GET_JOKE, output);
+        startActivity(intent);
+    }
 }
