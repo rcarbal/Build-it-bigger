@@ -10,5 +10,8 @@ Build it bigger, contains multiple flavors that uses multiple libraries and Clou
 
 - Free application flavor with ads.
 - Paid applicatin flavor with no ads
+- Paid version uses external library to show jokes.
+- Google Cloud Enpoints is used to connect the external android library to an external Java library.
+
 
 
