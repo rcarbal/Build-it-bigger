@@ -4,7 +4,7 @@ This the fourth project in the Udacity Android Developer Nanodegree.
 
 ## Features
 
-Build it bigger, contains multiple flavors that uses multiple libraries and Cloud Google endpoints.
+Build it bigger, contains multiple flavors that uses multiple libraries and Cloud Google endpoints. An external android library is used in the paid flavor of the application.  A Google Cloud endpoint server is used to connect the android libray with an external java library to display the jokes.
 
 ## Implementation.
 
