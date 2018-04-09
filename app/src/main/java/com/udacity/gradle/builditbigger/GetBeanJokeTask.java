@@ -1,8 +1,10 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.example.myandroidlibrary.DisplayJokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -12,16 +14,11 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import java.io.IOException;
 
 public class GetBeanJokeTask extends AsyncTask<Context, Void, String> {
-    public GetBeanJokeTask(AsyncResponse response) {
-        this.response = response;
+    public GetBeanJokeTask() {
+
     }
 
-    //Interface
-    public interface AsyncResponse {
-        void processFinish(String output);
-    }
-    //Asynctask global varuables
-    public AsyncResponse response = null;
+
     private static MyApi myApiService = null;
     private Context context;
 
@@ -55,7 +52,9 @@ public class GetBeanJokeTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        response.processFinish(s);
+        Intent intent = new Intent(context, DisplayJokeActivity.class);
+        intent.putExtra(DisplayJokeActivity.GET_JOKE, s);
+        context.startActivity(intent);
     }
 }
 

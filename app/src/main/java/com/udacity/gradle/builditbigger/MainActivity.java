@@ -1,27 +1,24 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myandroidlibrary.DisplayJokeActivity;
 
-import java.util.Random;
+public class MainActivity extends AppCompatActivity{
 
-
-public class MainActivity extends AppCompatActivity
-        implements GetBeanJokeTask.AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_main);
+        String a ="";
     }
 
 
@@ -48,15 +45,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void tellJoke(View view) {
-        GetBeanJokeTask task = new GetBeanJokeTask(this);
+        GetBeanJokeTask task = new GetBeanJokeTask();
         task.execute(this);
     }
 
-
-    @Override
-    public void processFinish(String output) {
-        Intent intent = new Intent(MainActivity.this, DisplayJokeActivity.class);
-        intent.putExtra(DisplayJokeActivity.GET_JOKE, output);
-        startActivity(intent);
+    public void noJoke(View view){
+        Toast.makeText(this, "No Joke", Toast.LENGTH_SHORT).show();
     }
+
 }
